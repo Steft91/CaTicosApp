@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'features/expenses/screens/home_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
   await Supabase.initialize(
-    url: 'https://llsjyicsvobkmqhqhumh.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxsc2p5aWNzdm9ia21xaHFodW1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxOTM5ODUsImV4cCI6MjA4ODc2OTk4NX0.4m2PoM67PUDZD2XJKLwg2VdE6ehHZUTyxNlXR4nlFRU',
+    url: dotenv.get('SUPABASE_URL'),
+    anonKey: dotenv.get('SUPABASE_ANON_KEY'),
   );
 
   runApp(const MyApp());
